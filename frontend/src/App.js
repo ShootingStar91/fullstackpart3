@@ -92,7 +92,7 @@ const App = () => {
       const newPerson = {name: newName, number: newNumber, id: id}
       personService.update(newPerson,
         ).then((response) => {
-        setSuccessMessage("Puhelinnumero päivitettiin onnistuneesti")
+        setSuccessMessage("Puhelinnumero päivitettiin onnistuneesti!")
         setTimeout(() => {
           setSuccessMessage(null)
     
