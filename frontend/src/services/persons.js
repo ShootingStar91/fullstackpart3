@@ -2,7 +2,7 @@
 import axios from 'axios'
 
 const PORT = process.env.PORT || 3001
-const url = `http://localhost:${PORT}/api/persons`
+const url = `/api/persons`
 
 const getAll = (callBack) => {
   let result = axios
