@@ -103,14 +103,13 @@ const App = () => {
         }, 5000)
       })
       
-      const newPersonList = persons.filter((person) => person.id != id).concat(newPerson)
+      const newPersonList = persons.filter((person) => person.id !== id).concat(newPerson)
       setPersons(newPersonList)
       setShownNames(newPersonList)      
 
       return
     }
     const newPerson = {name: newName, number: newNumber}
-    const newPersons = [...persons, newPerson]
 
     // Send to server
     personService.create(newPerson)

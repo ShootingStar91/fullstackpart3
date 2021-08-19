@@ -1,7 +1,6 @@
 
 import axios from 'axios'
 
-const PORT = process.env.PORT || 3001
 const url = `/api/persons`
 
 const getAll = (callBack) => {
@@ -30,7 +29,8 @@ const update = person => {
   return (request)
 }
 
-
-export default {
-    getAll, create, deletePerson, update
+const service = {
+  getAll, create, deletePerson, update
 }
+
+export default service

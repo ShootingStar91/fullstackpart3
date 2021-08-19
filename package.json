@@ -1,5 +1,6 @@
 {
   "devDependencies": {
+    "eslint": "^7.32.0",
     "nodemon": "^2.0.12"
   },
   "name": "fullstackpart3",
@@ -119,7 +120,9 @@
     "start": "node index.js",
     "dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build:ui": "rm -rf build && cd frontend/ && npm run build --prod && cp -r build ../"
+    "build:ui": "rm -rf build && cd frontend/ && npm run build --prod && cp -r build ../",
+    "lint": "eslint .",
+    "lintfix": "eslint . --fix"
   },
   "author": "",
   "license": "ISC",
