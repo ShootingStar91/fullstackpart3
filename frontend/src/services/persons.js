@@ -14,13 +14,13 @@ const getAll = (callBack) => {
 }
 
 const create = person => {
-    const request = axios.post(url, person)
-    return (request.then(response => response.data))
+  const request = axios.post(url, person)
+  return request.then(response => response.data)
 }
 
 const deletePerson = (person_id, callBack, errorCallBack) => {
   const request = axios.delete(`${url}/${person_id}`)
-  .then(response => {callBack()}).catch((error) => errorCallBack())
+  .then(response => {callBack()}).catch((error) => errorCallBack)
   return(request)
 }
 

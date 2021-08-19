@@ -49,11 +49,10 @@ const AddingForm = (props) => {
 }
 
 const DisplayPersons = (props) => {
-
   return (
     <div>
       {props.shownNames.map((person) => 
-        <p key={person.name}>{person.name} {person.number} 
+        <p key={person.id}>{person.name} {person.number} 
           <DeleteButton handleDeleteButton={props.handleDeleteButton} id={person.id} />
         </p>
       )}
@@ -63,7 +62,7 @@ const DisplayPersons = (props) => {
 
 const App = () => {
   const [ persons, setPersons] = useState([
-    { name: 'Hard Coded', number: '040-123456' },
+    { name: 'Hard Coded', number: '040-123456', id: '1' },
   ]) 
   const [ newName, setNewName ] = useState('')
   const [ newNumber, setNewNumber ] = useState('')
@@ -98,7 +97,7 @@ const App = () => {
     
         }, 5000)
       }).catch(error => {
-        setErrorMessage("Puhelinnumero on aiemmin poistettu tietokannasta")
+        setErrorMessage(error.response.data)
         setTimeout(() => {
           setErrorMessage(null)
         }, 5000)
@@ -112,28 +111,25 @@ const App = () => {
     }
     const newPerson = {name: newName, number: newNumber}
     const newPersons = [...persons, newPerson]
-    setPersons(newPersons)
-    setShownNames([...persons, newPerson])
 
     // Send to server
-    const result = personService.create(newPerson)
-    result.then((newPerson) => {
-      const newPersonList = persons.concat(newPerson)
-      setPersons(newPersonList)
-      setShownNames(newPersonList)
-      setSuccessMessage("Puhelinnumero lisättiin onnistuneesti")
-      setTimeout(() => {
-        setSuccessMessage(null)
-  
-      }, 5000)
-    }
-    ).catch(error => {
-      setErrorMessage("Puhelinnumeron lisääminen ei onnistunut")
-      setTimeout(() => {
-        setErrorMessage(null)
-      }, 5000)
-
-    })
+    personService.create(newPerson)
+      .then((newPerson) => {
+        const newPersonList = persons.concat(newPerson)
+        setPersons(newPersonList)
+        setShownNames(newPersonList)
+        setSuccessMessage("Puhelinnumero lisättiin onnistuneesti")
+        setTimeout(() => {
+          setSuccessMessage(null)
+    
+        }, 5000)
+      }).catch((error) => {
+        console.log(error.response.data.error)
+        setErrorMessage(error.response.data.error)
+        setTimeout(() => {
+          setErrorMessage(null)
+        }, 5000)
+      })
 
   }
 
